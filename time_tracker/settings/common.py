@@ -38,6 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application definition
 
@@ -52,6 +53,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "rest_auth",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "rest_auth.registration",
 ]
 
 MIDDLEWARE = [
@@ -67,6 +72,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'time_tracker.urls'
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 os.environ["PROJECT_ROOT"] = str(PROJECT_ROOT)
+
+SITE_ID = 1
 
 
 TEMPLATES = [
