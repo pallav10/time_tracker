@@ -11,10 +11,11 @@ jobs:
   health-checkup-job:
     runs-on: ubuntu-latest
     env:
+      ENV_NAME: ci
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost # default host value for the database
-      POSTGRES_DB: test_msn_db
+      POSTGRES_DB: test_timelog_db
       POSTGRES_PORT: 5432
     services:
       postgres:
