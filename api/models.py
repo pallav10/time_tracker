@@ -18,11 +18,28 @@ class TimeStampModelMixin(models.Model):
         abstract = True
 
 
+class Project(TimeStampModelMixin):
+    name = models.CharField(max_length=64, blank=True, null=True)
+    description = models.TextField(max_length=500, blank=True, null=True)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
 class TimeLog(TimeStampModelMixin):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='logs',
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='user_logs',
+        blank=True,
+        null=True,
     )
     start_time = models.TimeField(null=True, blank=True)
     end_time = models.TimeField(null=True, blank=True)

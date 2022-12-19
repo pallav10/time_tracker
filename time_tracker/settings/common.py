@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'time_tracker.wsgi.application'
 
 DEFAULT_DATABASE = {
     'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
-    'NAME': os.getenv('DB_NAME', 'msn_db'),
+    'NAME': os.getenv('DB_NAME', 'time_log_db'),
     'USER': os.getenv('DB_USER', 'django'),
     'PASSWORD': os.getenv('DB_PASSWORD', 'django'),
     'HOST': os.getenv('DB_HOST', 'localhost'),

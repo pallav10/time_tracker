@@ -17,6 +17,8 @@ class TestSubscriptionApi(APITestCase):
         self.maxDiff = None
         self.user = baker.make(settings.AUTH_USER_MODEL)
         baker.make(Token, user=self.user)
+        self.project = baker.make(Project, members=[self.user])
+        self.project2 = baker.make(Project)
         self.time_log = baker.make(
             TimeLog,
             user=self.user,
@@ -39,9 +41,36 @@ class TestSubscriptionApi(APITestCase):
             data={
                 'start_time': (datetime_now() - timedelta(hours=5)).strftime("%H:%M"),
                 'end_time': datetime_now().time().strftime("%H:%M"),
+                'project_id': self.project.pk,
             },
         )
         self.assertEqual(response.status_code, 201)
+
+    def test_create_time_log_invalid_user(self):
+        response = self.client.post(
+            path=reverse("logs"),
+            data={
+                'start_time': (datetime_now() - timedelta(hours=5)).strftime("%H:%M"),
+                'end_time': datetime_now().time().strftime("%H:%M"),
+                'project_id': self.project2.pk,
+            },
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_create_time_log_invalid_project(self):
+        response = self.client.post(
+            path=reverse("logs"),
+            data={
+                'start_time': (datetime_now() - timedelta(hours=5)).strftime("%H:%M"),
+                'end_time': datetime_now().time().strftime("%H:%M"),
+                'project_id': 3423,
+            },
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(
+            str(response.data['project_id'][0]),
+            'Invalid pk "3423" - object does not exist.',
+        )
 
     def test_get_single_time_log(self):
         response = self.client.get(
