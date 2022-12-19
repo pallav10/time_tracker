@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ENV.get("SECRET_KEY", 'django-insecure-k2-gr(xh-!)j4rrup$_0dx+i09@-78@wnzum7x*^!+z=dbc_67')
+SECRET_KEY = ENV.get("SECRET_KEY", 'django-insecure-wr%5(qt65cx(z(+1!tw7$vv50tq+l3uq78^tcuedc(*-s0to^z')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,5 +145,3 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
