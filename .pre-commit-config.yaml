@@ -1,0 +1,23 @@
+# File used for configuring project pre-commit hooks.
+repos:
+- repo: https://github.com/ambv/black
+  rev: 22.10.0
+  hooks:
+  - id: black
+    exclude: ^(api/migrations/|time_tracker/settings/)
+    args: [
+      --check
+    ]
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.1.0
+  hooks:
+  - id: check-json
+  - id: check-xml
+  - id: debug-statements
+- repo: https://github.com/jorisroovers/gitlint
+  rev: v0.17.0
+  hooks:
+  - id: gitlint
+default_language_version:
+  python: python3.9
+default_stages: [commit, push]

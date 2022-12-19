@@ -1,0 +1,17 @@
+[tool.black]
+line-length = 88
+target_version = ['py39']
+skip-string-normalization = true
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.venv
+  | \venv
+  | _build
+  | migrations
+  | settings
+  | build
+  | dist
+)/
+'''
