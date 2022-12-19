@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'time_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DEFAULT_DATABASE = {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
+    'NAME': os.getenv('DB_NAME', 'msn_db'),
+    'USER': os.getenv('DB_USER', 'django'),
+    'PASSWORD': os.getenv('DB_PASSWORD', 'django'),
+    'HOST': os.getenv('DB_HOST', 'localhost'),
+    'PORT': os.getenv('DB_PORT', '5432')
 }
 
 DATABASES = {'default': DEFAULT_DATABASE}
